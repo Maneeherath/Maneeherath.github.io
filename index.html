@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maneesha Herath — QA Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --card: #16161f;
+    --border: #252535;
+    --accent: #7c6af7;
+    --accent2: #f7c26a;
+    --accent3: #6af7c2;
+    --text: #e8e8f0;
+    --muted: #8888aa;
+    --light: #c0c0d8;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: 0;
+    pointer-events: none;
+    opacity: .025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 3rem;
+    background: rgba(10,10,15,.8);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem;
+    color: var(--accent);
+    letter-spacing: .02em;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: .85rem;
+    font-weight: 400;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 8rem 3rem 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-glow {
+    position: absolute;
+    width: 700px; height: 700px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(124,106,247,.18) 0%, transparent 70%);
+    top: -150px; right: -100px;
+    pointer-events: none;
+    animation: pulse 8s ease-in-out infinite;
+  }
+  .hero-glow2 {
+    position: absolute;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(247,194,106,.1) 0%, transparent 70%);
+    bottom: 50px; left: 100px;
+    pointer-events: none;
+    animation: pulse 10s ease-in-out infinite reverse;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.15); opacity: .7; }
+  }
+  .hero-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+  .hero-label {
+    font-family: 'DM Mono', monospace;
+    font-size: .75rem;
+    color: var(--accent);
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: .75rem;
+    opacity: 0; animation: fadeUp .6s .2s forwards;
+  }
+  .hero-label::before {
+    content: '';
+    display: inline-block;
+    width: 40px; height: 1px;
+    background: var(--accent);
+  }
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    line-height: 1;
+    letter-spacing: -.02em;
+    margin-bottom: .5rem;
+    opacity: 0; animation: fadeUp .6s .35s forwards;
+  }
+  h1 em { font-style: italic; color: var(--accent); }
+  .hero-sub {
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    color: var(--muted);
+    font-weight: 300;
+    margin-bottom: 2.5rem;
+    max-width: 520px;
+    line-height: 1.7;
+    opacity: 0; animation: fadeUp .6s .5s forwards;
+  }
+  .hero-ctas {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    opacity: 0; animation: fadeUp .6s .65s forwards;
+  }
+  .btn {
+    padding: .85rem 2rem;
+    border-radius: 3px;
+    font-size: .9rem;
+    font-weight: 500;
+    text-decoration: none;
+    letter-spacing: .04em;
+    transition: all .25s;
+    cursor: pointer;
+    display: inline-flex; align-items: center; gap: .5rem;
+  }
+  .btn-primary { background: var(--accent); color: #fff; border: 1px solid var(--accent); }
+  .btn-primary:hover { background: #9685ff; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(124,106,247,.35); }
+  .btn-ghost { background: transparent; color: var(--light); border: 1px solid var(--border); }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+  .hero-stats {
+    display: flex; gap: 3rem; margin-top: 4rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--border);
+    opacity: 0; animation: fadeUp .6s .8s forwards;
+  }
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.2rem;
+    color: var(--text);
+    line-height: 1;
+    display: block;
+  }
+  .stat-label { font-size: .75rem; color: var(--muted); text-transform: uppercase; letter-spacing: .12em; margin-top: .4rem; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  section { padding: 6rem 3rem; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: .72rem;
+    color: var(--accent);
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    display: flex; align-items: center; gap: .6rem;
+  }
+  .section-label::before { content: ''; width: 28px; height: 1px; background: var(--accent); display: inline-block; }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.1;
+    margin-bottom: 3rem;
+    color: var(--text);
+  }
+
+  #about { background: var(--surface); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+  .about-text p { color: var(--light); line-height: 1.85; font-size: 1rem; margin-bottom: 1.5rem; }
+  .about-text p span { color: var(--accent); font-weight: 500; }
+  .contact-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+  .contact-list li { display: flex; align-items: center; gap: 1rem; font-size: .9rem; color: var(--muted); }
+  .contact-list .icon {
+    width: 36px; height: 36px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: .85rem; flex-shrink: 0;
+  }
+  .contact-list a { color: var(--light); text-decoration: none; transition: color .2s; }
+  .contact-list a:hover { color: var(--accent); }
+
+  #skills { background: var(--bg); }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+  .skill-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.75rem;
+    transition: border-color .25s, transform .25s;
+    position: relative; overflow: hidden;
+  }
+  .skill-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent3));
+    opacity: 0; transition: opacity .25s;
+  }
+  .skill-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+  .skill-card:hover::before { opacity: 1; }
+  .skill-card-title { font-size: .72rem; text-transform: uppercase; letter-spacing: .14em; color: var(--accent); font-family: 'DM Mono', monospace; margin-bottom: 1rem; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: .5rem; }
+  .tag { background: rgba(124,106,247,.1); border: 1px solid rgba(124,106,247,.25); color: var(--light); font-size: .78rem; padding: .3rem .75rem; border-radius: 100px; font-weight: 400; }
+  .tag.green { background: rgba(106,247,194,.08); border-color: rgba(106,247,194,.22); }
+  .tag.gold { background: rgba(247,194,106,.08); border-color: rgba(247,194,106,.22); }
+
+  #projects { background: var(--surface); }
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1.5rem; }
+  .project-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+    display: flex; flex-direction: column;
+    transition: border-color .25s, transform .25s;
+  }
+  .project-card:hover { border-color: rgba(124,106,247,.5); transform: translateY(-4px); }
+  .project-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 1rem; }
+  .project-icon { width: 42px; height: 42px; background: rgba(124,106,247,.15); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+  .project-year { font-family: 'DM Mono', monospace; font-size: .72rem; color: var(--muted); padding: .25rem .6rem; border: 1px solid var(--border); border-radius: 100px; }
+  .project-name { font-size: 1.05rem; font-weight: 500; color: var(--text); margin-bottom: .6rem; line-height: 1.3; }
+  .project-desc { font-size: .88rem; color: var(--muted); line-height: 1.7; flex: 1; margin-bottom: 1.2rem; }
+  .project-qa { display: flex; flex-wrap: wrap; gap: .4rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+  .qa-tag { font-family: 'DM Mono', monospace; font-size: .7rem; color: var(--accent3); background: rgba(106,247,194,.07); border: 1px solid rgba(106,247,194,.2); padding: .2rem .6rem; border-radius: 4px; }
+
+  #experience { background: var(--bg); }
+  .timeline { display: flex; flex-direction: column; gap: 2rem; }
+  .timeline-item { display: grid; grid-template-columns: 180px 1fr; gap: 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
+  .timeline-item:last-child { border-bottom: none; }
+  .timeline-date { font-family: 'DM Mono', monospace; font-size: .75rem; color: var(--accent); padding-top: .25rem; }
+  .timeline-role { font-weight: 500; font-size: 1.05rem; color: var(--text); margin-bottom: .3rem; }
+  .timeline-org { font-size: .88rem; color: var(--accent2); margin-bottom: .75rem; }
+  .timeline-desc { font-size: .9rem; color: var(--muted); line-height: 1.7; }
+
+  #extras { background: var(--surface); }
+  .extras-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+  .extras-title { font-family: 'DM Serif Display', serif; font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--text); }
+  .cert-list, .vol-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+  .cert-list li, .vol-list li { padding: 1rem 1.2rem; background: var(--card); border: 1px solid var(--border); border-radius: 8px; font-size: .88rem; color: var(--light); line-height: 1.5; display: flex; align-items: flex-start; gap: .75rem; }
+  .cert-list li::before { content: '🎓'; flex-shrink: 0; }
+  .vol-list li::before { content: '⚡'; flex-shrink: 0; }
+  .cert-list li a { color: var(--accent); text-decoration: none; font-size: .78rem; display: block; margin-top: .2rem; }
+  .cert-list li a:hover { text-decoration: underline; }
+  .vol-year { font-family: 'DM Mono', monospace; font-size: .7rem; color: var(--muted); display: block; margin-top: .2rem; }
+
+  footer { background: var(--bg); border-top: 1px solid var(--border); padding: 3rem; text-align: center; }
+  .footer-name { font-family: 'DM Serif Display', serif; font-size: 2rem; color: var(--accent); margin-bottom: .5rem; }
+  .footer-sub { color: var(--muted); font-size: .85rem; margin-bottom: 2rem; }
+  .social-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
+  .social-links a { color: var(--muted); text-decoration: none; font-size: .82rem; font-family: 'DM Mono', monospace; letter-spacing: .08em; transition: color .2s; display: flex; align-items: center; gap: .4rem; }
+  .social-links a:hover { color: var(--accent); }
+
+  .reveal { opacity: 0; transform: translateY(32px); transition: opacity .65s, transform .65s; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 4rem 1.5rem; }
+    #hero { padding: 7rem 1.5rem 4rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .timeline-item { grid-template-columns: 1fr; gap: .5rem; }
+    .extras-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
+    .projects-grid { grid-template-columns: 1fr; }
+  }
+  .profile-photo {
+  width: 160px; height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--accent);
+  box-shadow: 0 0 0 6px rgba(124,106,247,.15);
+  display: block;
+  margin-bottom: 1.5rem;
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">MH.</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#extras">Certs</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-inner">
+    <div class="hero-label">QA Engineer · KDU Computer Science</div>
+    <h1>Maneesha<br><em>Herath</em></h1>
+    <p class="hero-sub">Ensuring software reliability through structured testing, defect analysis, and quality-driven engineering across web and mobile applications.</p>
+    <div class="hero-ctas">
+  <a href="mailto:maneeherath280@gmail.com" class="btn btn-primary">✉ Get in touch</a>
+  <a href="maneesha-cv.pdf" download class="btn btn-ghost">⬇ Download CV</a>
+  <a href="#projects" class="btn btn-ghost">↓ View Projects</a>
+</div>
+    <div class="hero-stats">
+      <div>
+        <span class="stat-num">7+</span>
+        <p class="stat-label">Projects Tested</p>
+      </div>
+      <div>
+        <span class="stat-num">3+</span>
+        <p class="stat-label">Years Active</p>
+      </div>
+      <div>
+        <span class="stat-num">6</span>
+        <p class="stat-label">Volunteer Roles</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="section-inner">
+    <p class="section-label">Who I am</p>
+    <h2 class="section-title">Passionate about<br>software quality.</h2>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>I'm an undergraduate <span>Computer Science student</span> at General Sir John Kotelawala Defence University, specialising in Quality Assurance Engineering.</p>
+        <p>With hands-on experience spanning <span>manual testing, database verification, performance evaluation</span>, and UI/UX validation, I bring a detail-oriented mindset to every project I touch. I thrive in Agile environments and have a strong grasp of both SDLC and STLC.</p>
+        <p>Beyond testing, I coordinate large-scale music events, write content, and lead student chapter roles — balancing <span>technical rigour with strong interpersonal skills.</span></p>
+      </div>
+      <div class="reveal">
+        <img src="manee.jpg" alt="Maneesha Herath" class="profile-photo">
+        <ul class="contact-list">
+          <li><span class="icon">✉</span><span><a href="mailto:maneeherath280@gmail.com">maneeherath280@gmail.com</a></span></li>
+          <li><span class="icon">📞</span><span>+94 76 233 4867</span></li>
+          <li><span class="icon">in</span><span><a href="http://www.linkedin.com/in/maneesha-herath-883228293" target="_blank">linkedin.com/in/maneesha-herath</a></span></li>
+          <li><span class="icon">⌥</span><span><a href="https://github.com/Maneeherath" target="_blank">github.com/Maneeherath</a></span></li>
+          <li><span class="icon">📍</span><span>Sri Lanka</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="section-inner">
+    <p class="section-label">Capabilities</p>
+    <h2 class="section-title">Skills &amp; Tools</h2>
+    <div class="skills-grid">
+      <div class="skill-card reveal">
+        <p class="skill-card-title">Quality Assurance</p>
+        <div class="skill-tags">
+          <span class="tag">Manual Testing</span>
+          <span class="tag">Test Case Design</span>
+          <span class="tag">Bug Reporting</span>
+          <span class="tag">Functional Testing</span>
+          <span class="tag">Regression Testing</span>
+          <span class="tag">Usability Testing</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <p class="skill-card-title">Methodologies</p>
+        <div class="skill-tags">
+          <span class="tag gold">SDLC</span>
+          <span class="tag gold">STLC</span>
+          <span class="tag gold">Agile</span>
+          <span class="tag gold">Scenario Testing</span>
+          <span class="tag gold">Boundary Testing</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <p class="skill-card-title">Database &amp; Technical</p>
+        <div class="skill-tags">
+          <span class="tag green">SQL</span>
+          <span class="tag green">Data Validation</span>
+          <span class="tag green">DB Verification</span>
+          <span class="tag green">Python</span>
+          <span class="tag green">JavaScript</span>
+          <span class="tag green">HTML / CSS</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <p class="skill-card-title">Soft Skills &amp; Tools</p>
+        <div class="skill-tags">
+          <span class="tag">Leadership</span>
+          <span class="tag">Communication</span>
+          <span class="tag">Critical Thinking</span>
+          <span class="tag">MS Office</span>
+          <span class="tag">Excel</span>
+          <span class="tag">Canva</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="section-inner">
+    <p class="section-label">Portfolio</p>
+    <h2 class="section-title">QA Projects</h2>
+    <div class="projects-grid">
+      <div class="project-card reveal">
+        <div class="project-header">
+          <div class="project-icon">🤖</div>
+          <span class="project-year">Present</span>
+        </div>
+        <p class="project-name">Computational Modeling System (Final Year)</p>
+        <p class="project-desc">Testing and validating a machine learning system that analyzes gameplay behavior. Responsible for validating model inputs, outputs, and performance benchmarks.</p>
+        <div class="project-qa">
+          <span class="qa-tag">Data Validation</span>
+          <span class="qa-tag">Performance Testing</span>
+          <span class="qa-tag">Defect Identification</span>
+        </div>
+      </div>
+      <div class="project-card reveal">
+        <div class="project-header">
+          <div class="project-icon">💪</div>
+          <span class="project-year">2025</span>
+        </div>
+        <p class="project-name">Personalized Workout Planner</p>
+        <p class="project-desc">Tested workout navigation, GIF tutorials, and exercise flows across multiple devices and browsers. Handled edge cases like missing media and slow network rendering.</p>
+        <div class="project-qa">
+          <span class="qa-tag">Functional Testing</span>
+          <span class="qa-tag">UI/UX Validation</span>
+          <span class="qa-tag">Responsiveness</span>
+        </div>
+      </div>
+      <div class="project-card reveal">
+        <div class="project-header">
+          <div class="project-icon">👤</div>
+          <span class="project-year">2025</span>
+        </div>
+        <p class="project-name">Smart Face Recognition Attendance System</p>
+        <p class="project-desc">Validated facial recognition under different lighting and multi-face conditions. Tested emotion detection accuracy and verified SQLite attendance records and CSV exports.</p>
+        <div class="project-qa">
+          <span class="qa-tag">Functional Testing</span>
+          <span class="qa-tag">Database Validation</span>
+          <span class="qa-tag">UI Testing</span>
+        </div>
+      </div>
+      <div class="project-card reveal">
+        <div class="project-header">
+          <div class="project-icon">📚</div>
+          <span class="project-year">2025</span>
+        </div>
+        <p class="project-name">Multi-Agent Bookstore Simulation</p>
+        <p class="project-desc">Tested autonomous agent workflows for purchasing, inventory restocking, and sales tracking. Verified monitoring interface performance during concurrent activity.</p>
+        <div class="project-qa">
+          <span class="qa-tag">Scenario Testing</span>
+          <span class="qa-tag">Workflow Validation</span>
+          <span class="qa-tag">Reliability Testing</span>
+        </div>
+      </div>
+      <div class="project-card reveal">
+        <div class="project-header">
+          <div class="project-icon">✅</div>
+          <span class="project-year">2025</span>
+        </div>
+        <p class="project-name">To-Do List Mobile Application</p>
+        <p class="project-desc">Designed and executed test cases for task management features. Verified cloud backup/restore, search functionality, and usability across Android devices.</p>
+        <div class="project-qa">
+          <span class="qa-tag">Test Case Design</span>
+          <span class="qa-tag">Functional Testing</span>
+          <span class="qa-tag">Usability Testing</span>
+        </div>
+      </div>
+      <div class="project-card reveal">
+        <div class="project-header">
+          <div class="project-icon">🛒</div>
+          <span class="project-year">2024</span>
+        </div>
+        <p class="project-name">Computer Store Management + AI Chatbot</p>
+        <p class="project-desc">Tested customer portal workflows and chatbot responses for text and voice queries. Verified role-based access controls and database consistency throughout.</p>
+        <div class="project-qa">
+          <span class="qa-tag">End-to-End Testing</span>
+          <span class="qa-tag">Chatbot Validation</span>
+          <span class="qa-tag">Regression Testing</span>
+        </div>
+      </div>
+      <div class="project-card reveal">
+        <div class="project-header">
+          <div class="project-icon">📦</div>
+          <span class="project-year">2024</span>
+        </div>
+        <p class="project-name">Inventory Management System (Java/DSA)</p>
+        <p class="project-desc">Validated sorting algorithms and inventory operations across different datasets. Tested backup/restore processes and role-based access controls in a DSA-driven system.</p>
+        <div class="project-qa">
+          <span class="qa-tag">Algorithm Testing</span>
+          <span class="qa-tag">Boundary Testing</span>
+          <span class="qa-tag">Access Control Testing</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="section-inner">
+    <p class="section-label">Background</p>
+    <h2 class="section-title">Education &amp; Experience</h2>
+    <div class="timeline">
+      <div class="timeline-item reveal">
+        <div class="timeline-date">2023 – Present</div>
+        <div>
+          <p class="timeline-role">BSc (Hons) Computer Science</p>
+          <p class="timeline-org">General Sir John Kotelawala Defence University</p>
+          <p class="timeline-desc">Undergraduate programme with a focus on QA Engineering, software development, and systems design. Currently completing final year research project on computational modeling and gameplay analytics.</p>
+        </div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-date">2023 – Present</div>
+        <div>
+          <p class="timeline-role">Event Coordinator</p>
+          <p class="timeline-org">DADS Entertainment (PVT) Ltd.</p>
+          <p class="timeline-desc">Organizing music events, content writing, and overseeing ticketing operations. Managing ticket sales, budgeting, and vendor liaison to ensure seamless event delivery.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="extras">
+  <div class="section-inner">
+    <p class="section-label">Credentials</p>
+    <h2 class="section-title">Certifications &amp; Volunteering</h2>
+    <div class="extras-grid">
+      <div class="reveal">
+        <h3 class="extras-title">Certifications</h3>
+        <ul class="cert-list">
+          <li>
+            <div>
+              Online Learning Program in Python<br>
+              <span style="font-size:.78rem;color:var(--muted)">University of Moratuwa · 2024</span>
+            </div>
+          </li>
+          <li>
+            <div>
+              Introduction to Packet Tracer<br>
+              <span style="font-size:.78rem;color:var(--muted)">Cisco Networking Academy · 2023</span>
+              <a href="https://drive.google.com/file/d/1Atjc_xPhGP-twwILumLI9eLFZkSqnkvk/view?usp=drive_link" target="_blank">View Certificate ↗</a>
+            </div>
+          </li>
+          <li>
+            <div>
+              Introduction to Networks<br>
+              <span style="font-size:.78rem;color:var(--muted)">Cisco Networking Academy · 2023</span>
+              <a href="https://drive.google.com/file/d/1gSggXXdfqp2hFKbsASmghtonOUUc6MQs/view?usp=drive_link" target="_blank">View Certificate ↗</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="reveal">
+        <h3 class="extras-title">Volunteering</h3>
+        <ul class="vol-list">
+          <li><div>Editor – Rotaract Club of KDU<span class="vol-year">2025 – 2026</span></div></li>
+          <li><div>Public Relations Director – BCS Student Chapter of KDU<span class="vol-year">2025 – 2026</span></div></li>
+          <li><div>Secretary Team – BCS Student Chapter<span class="vol-year">2024</span></div></li>
+          <li><div>Secretary Team – IEEE Student Branch & Computer Society of KDU<span class="vol-year">2023 – 2024</span></div></li>
+          <li><div>Professional Development Director – Rotaract Club of KDU<span class="vol-year">2023 – 2024</span></div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p class="footer-name">Maneesha Herath</p>
+  <p class="footer-sub">QA Engineer · Open to opportunities</p>
+  <div class="social-links">
+    <a href="mailto:maneeherath280@gmail.com">✉ Email</a>
+    <a href="http://www.linkedin.com/in/maneesha-herath-883228293" target="_blank">in LinkedIn</a>
+    <a href="https://github.com/Maneeherath" target="_blank">⌥ GitHub</a>
+    <a href="tel:+94762334867">📞 +94 76 233 4867</a>
+  </div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(r => io.observe(r));
+</script>
+</body>
+</html>
